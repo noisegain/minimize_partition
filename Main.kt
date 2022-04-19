@@ -5,7 +5,7 @@ import java.util.*
 import kotlin.system.measureTimeMillis
 
 var k = 0
-var iterations = 200000
+var iterations = 0
 
 fun parse(input: Scanner): MutableList<Double> {
     val arr = mutableListOf<Double>()
@@ -43,7 +43,7 @@ fun main(args: Array<String>) {
     val parallel = argsMap.contains("-p")
     val arr = parse(input)
     println(
-        "Calculating with $iterations getIterations and $attempts attempts in ${
+        "Calculating with $iterations iterations and $attempts attempts in ${
             if (parallel) "parallel" else "single"
         } mode"
     )
@@ -72,7 +72,7 @@ private fun calc(parallel: Boolean, attempts: Int, arr: MutableList<Double>) =
 
 fun write(output: Writer, ans: Pair<Double, List<Double>>) {
     output.write("${ans.first}\n")
-    output.write(ans.second.windowed(k, k).joinToString("\n"))
+    output.write(ans.second.windowed(k, k).map { it to it.sum() }.joinToString("\n"))
     output.close()
     println("Result: ${ans.first}")
 }
