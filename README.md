@@ -14,3 +14,10 @@ partition array by groups of k elements and trying to minimize diff of max and m
 * ```-c <number>``` number of algorithm iterations
 * ```-a <number>``` number of attempts to calculate
 * ```-p``` flag for parallel computing
+
+### Defaults
+* ```-i = stdin```
+* ```-o = stdout```
+* ```-c = 100000```
+* ```-a = 50```
+* ```-p = off```
