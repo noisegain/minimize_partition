@@ -43,7 +43,7 @@ fun main(args: Array<String>) {
     val parallel = argsMap.contains("-p")
     val arr = parse(input)
     println(
-        "Calculating with $iterations iterations and $attempts attempts in ${
+        "Calculating with $iterations getIterations and $attempts attempts in ${
             if (parallel) "parallel" else "single"
         } mode"
     )
