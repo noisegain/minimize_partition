@@ -21,3 +21,9 @@ partition array by groups of k elements and trying to minimize diff of max and m
 * ```-c = 100000```
 * ```-a = 50```
 * ```-p = off```
+
+### Input
+```<integer> <double...>```
+* Fist number - count of elements in group
+* Others - values
+* Separator - any whitespaces
