@@ -1,7 +1,7 @@
 import java.util.*
 import kotlin.random.Random
 
-class Solver(private var arr: MutableList<Double>) {
+class Solver(private var arr: List<Double>) {
 
     private fun abs(arr: List<Double>): Double {
         val groups = arr.windowed(k, k).map { it.sum() }
@@ -15,7 +15,7 @@ class Solver(private var arr: MutableList<Double>) {
         return abs(arr) to arr
     }
 
-    private fun Double.update(tmp: MutableList<Double>): Double {
+    private fun Double.update(tmp: List<Double>): Double {
         val cur = abs(tmp)
         if (cur < this) {
             arr = tmp
@@ -27,7 +27,7 @@ class Solver(private var arr: MutableList<Double>) {
     private fun shuffling() {
         var ans = abs(arr)
         repeat(iterations / 100) {
-            ans = ans.update(arr.shuffled().toMutableList())
+            ans = ans.update(arr.shuffled())
         }
     }
 

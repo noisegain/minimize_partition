@@ -7,18 +7,16 @@ import kotlin.system.measureTimeMillis
 var k = 0
 var iterations = 0
 
-fun parse(input: Scanner): MutableList<Double> {
-    val arr = mutableListOf<Double>()
+private fun parse(input: Scanner) = buildList {
     k = input.nextInt()
     while (input.hasNextDouble()) {
-        arr += input.nextDouble()
+        add(input.nextDouble())
     }
-    if (arr.size % k != 0) {
+    if (size % k != 0) {
         throw AssertionError(
             "Expected count of elements, that divides by $k"
         )
     }
-    return arr
 }
 
 fun main(args: Array<String>) {
@@ -58,21 +56,20 @@ fun main(args: Array<String>) {
     write(output, ans)
 }
 
-private fun calc(parallel: Boolean, attempts: Int, arr: MutableList<Double>) =
+private fun calc(parallel: Boolean, attempts: Int, arr: List<Double>) =
     (if (parallel) {
         (1..attempts).toList().parallelStream()
             .map {
-                Solver(arr.toMutableList()).solve()
+                Solver(arr.toList()).solve()
             }.toList()
     } else {
         List(attempts) {
-            Solver(arr.toMutableList()).solve()
+            Solver(arr.toList()).solve()
         }
     }).minByOrNull { it.first } ?: throw AssertionError("Something went wrong")
 
-fun write(output: Writer, ans: Pair<Double, List<Double>>) {
-    output.write("${ans.first}\n")
-    output.write(ans.second.windowed(k, k).map { it to it.sum() }.joinToString("\n"))
-    output.close()
+private fun write(output: Writer, ans: Pair<Double, List<Double>>) = output.use {
+    it.write("${ans.first}\n")
+    it.write(ans.second.windowed(k, k).map { it to it.sum() }.joinToString("\n"))
     println("Result: ${ans.first}")
 }
